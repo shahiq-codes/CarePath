@@ -1,0 +1,175 @@
+{
+  "identity": {
+    "name": "E1",
+    "role": "The Anti-AI Designer",
+    "philosophy": "Fusion over Imitation. Emotion First. Content is King.",
+    "anti_patterns": [
+      "Generic 'Medical Blue' (#007BFF)",
+      "Inter font everywhere",
+      "Center-everything layouts",
+      "Gradient overload",
+      "Tiny clickable areas"
+    ]
+  },
+  "project_context": {
+    "app_name": "CarePath Luxury Navigation",
+    "theme_mode": "light",
+    "target_audience": "Elderly, Caregivers, Non-tech users",
+    "emotional_tone": "Calm, Reassuring, Premium, Clear, Empathetic",
+    "key_flow": "Language Select -> Symptom Search -> AI Analysis -> Doctor/Hospital Cards"
+  },
+  "typography": {
+    "headings": {
+      "font_family": "Playfair Display, serif",
+      "usage": "All section titles, hero text, modal headers",
+      "weights": "Bold (700) or Black (900)",
+      "letter_spacing": "tracking-tight",
+      "line_height": "leading-none"
+    },
+    "body": {
+      "font_family": "Manrope, sans-serif",
+      "usage": "Paragraphs, inputs, labels, buttons",
+      "weights": "Medium (500) for text, Bold (700) for interactive elements",
+      "line_height": "leading-relaxed"
+    },
+    "accessibility_rules": [
+      "Minimum font size for body: 18px (text-lg)",
+      "Minimum font size for inputs: 20px (text-xl)",
+      "Headings must be at least 32px (text-4xl+)"
+    ]
+  },
+  "colors": {
+    "palette_name": "Organic & Earthy (Archetype 1)",
+    "primary": {
+      "hex": "#4A6741",
+      "name": "Sage Forest",
+      "usage": "Primary Buttons, Active States, Brand Icons"
+    },
+    "secondary": {
+      "hex": "#F9F9F7",
+      "name": "Warm Cream",
+      "usage": "Page Backgrounds, Card Backgrounds (Light)"
+    },
+    "accent": {
+      "hex": "#C66B3D",
+      "name": "Terracotta",
+      "usage": "Call to Actions (High Priority), Alerts"
+    },
+    "neutral": {
+      "text_main": "#1A1A1A",
+      "text_muted": "#4A4A4A",
+      "border": "#E5E5E0"
+    },
+    "feedback": {
+      "success": "#2E7D32",
+      "warning": "#ED6C02",
+      "error": "#D32F2F"
+    },
+    "gradients": "None. Use solid colors or subtle noise textures."
+  },
+  "layout_grid": {
+    "system": "The Bento Grid (Mode A: Tetris)",
+    "container_padding": "p-6 md:p-12 lg:p-20",
+    "gap_size": "gap-8 md:gap-12",
+    "card_radius": "rounded-2xl md:rounded-3xl",
+    "rules": [
+      "Never fill 100% of the grid perfectly. Leave breathing room.",
+      "Use col-span-full for Hero sections.",
+      "Use col-span-1 md:col-span-2 for Service Cards."
+    ]
+  },
+  "components": {
+    "buttons": {
+      "style": "Pill-shaped (rounded-full)",
+      "padding": "py-4 px-8 md:py-6 md:px-10",
+      "text_size": "text-lg md:text-xl font-bold",
+      "shadow": "shadow-lg hover:shadow-xl transition-all duration-300",
+      "hover_effect": "scale-105"
+    },
+    "inputs": {
+      "style": "Massive Search Bar",
+      "height": "h-16 md:h-20",
+      "text_size": "text-xl md:text-2xl",
+      "border": "border-2 border-primary/20 focus:border-primary",
+      "radius": "rounded-2xl"
+    },
+    "cards": {
+      "style": "Clean, Cardless feel or Soft Card",
+      "background": "bg-white",
+      "border": "border border-neutral-100",
+      "shadow": "shadow-[0_8px_30px_rgb(0,0,0,0.04)]",
+      "padding": "p-8"
+    },
+    "navigation": {
+      "style": "Glassmorphism (Crystal Variant)",
+      "classes": "bg-white/80 backdrop-blur-xl border-b border-white/20"
+    }
+  },
+  "visual_enhancers": {
+    "textures": "Add subtle noise/grain overlay to the background to reduce digital flatness.",
+    "icons": "Phosphor Icons (Duotone or Fill) - Large sizes (w-8 h-8 minimum).",
+    "motion": {
+      "library": "Framer Motion",
+      "types": [
+        "Staggered entrance for lists",
+        "Smooth scale on hover",
+        "Page transitions (fade + slide)"
+      ]
+    }
+  },
+  "image_urls": {
+    "hero_elderly": {
+      "url": "https://images.unsplash.com/photo-1752084794888-0b27a762b6fd",
+      "description": "Elderly woman smiling broadly, conveying trust and happiness",
+      "category": "Hero"
+    },
+    "doctor_trust": {
+      "url": "https://images.unsplash.com/photo-1622253694238-3b22139576c6",
+      "description": "Empathetic male doctor in blue scrubs",
+      "category": "Trust Section"
+    },
+    "nature_calm": {
+      "url": "https://images.unsplash.com/photo-1759593554816-daa272437349",
+      "description": "Fern frond unfurling, calming green background",
+      "category": "Background/Abstract"
+    },
+    "zen_element": {
+      "url": "https://images.unsplash.com/photo-1762932922297-767ca87bfe3f",
+      "description": "Stone lantern in tranquil garden",
+      "category": "Wellness Section"
+    }
+  },
+  "specific_pages": {
+    "language_selection": {
+      "layout": "Full screen, large grid of cards",
+      "elements": "Big flags/icons, native language names (e.g., 'English', 'Español')",
+      "interaction": "Single tap to select and proceed"
+    },
+    "symptom_search": {
+      "layout": "Central focus, minimal distractions",
+      "elements": "Voice input button (microphone icon), large text input, 'Common Symptoms' chips below"
+    },
+    "results_page": {
+      "layout": "List of large cards",
+      "elements": "Doctor photo, Specialty (large text), Distance, 'Book Now' button (Terracotta)"
+    }
+  },
+  "instructions_to_main_agent": [
+    "Use 'sonner' for all toast notifications.",
+    "Use 'lucide-react' or 'phosphor-icons' for icons.",
+    "Ensure all interactive elements have 'data-testid'.",
+    "Do NOT use gradients for text or backgrounds unless specified.",
+    "Implement the 'Language Selection' screen as the absolute first route.",
+    "Use the provided image URLs for the respective sections.",
+    "Strictly follow the spacing scale: p-8, p-12, p-20.",
+    "Ensure contrast ratios meet WCAG AAA for elderly users."
+  ],
+  "universal_guidelines": [
+    "Create depth through layered design elements with z-index hierarchy.",
+    "Use glass-morphism effects with backdrop filters (12-24px blur).",
+    "Do NOT apply universal transition (e.g., transition: all).",
+    "Do NOT center align the app container.",
+    "Every interaction needs micro-animations.",
+    "Use 2-3x more spacing than feels comfortable."
+  ]
+}
