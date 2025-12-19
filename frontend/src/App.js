@@ -164,9 +164,20 @@ const Home = () => {
         </div>
       </nav>
       
-      {/* Hero Section */}
-      <div className="container mx-auto px-6 md:px-12 py-12 md:py-20">
-        <div className="max-w-4xl mx-auto">
+      {/* Hero Section with Background */}
+      <div className="relative min-h-[600px] md:min-h-[700px] overflow-hidden">
+        {/* Background Image */}
+        <div className="absolute inset-0">
+          <div className="absolute inset-0 bg-gradient-to-r from-secondary via-secondary/95 to-secondary/70 z-10" />
+          <img
+            src="https://images.unsplash.com/photo-1765896387377-e293914d1e69?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NDQ2Mzl8MHwxfHNlYXJjaHw0fHxudXJzZSUyMGNhcmluZyUyMGVsZGVybHklMjBwYXRpZW50JTIwaG9zcGl0YWwlMjBjb21wYXNzaW9uYXRlfGVufDB8fHx8MTc2NjEwMjU4OHww&ixlib=rb-4.1.0&q=85"
+            alt="Compassionate healthcare"
+            className="w-full h-full object-cover opacity-40"
+          />
+        </div>
+        
+        <div className="container mx-auto px-6 md:px-12 py-12 md:py-20 relative z-20">
+          <div className="max-w-4xl mx-auto">
           <div className="text-center mb-12 md:mb-16 animate-fade-in">
             <h1 className="text-4xl sm:text-5xl lg:text-7xl font-black text-primary mb-6 tracking-tight leading-none">
               Tell us what you're experiencing
