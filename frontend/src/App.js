@@ -74,6 +74,10 @@ function App() {
     setCurrentPage('doctors');
   };
 
+  const handleViewCarePathway = () => {
+    setCurrentPage('pathway');
+  };
+
   const handleBackToResults = () => {
     setCurrentPage('results');
   };
