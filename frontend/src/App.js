@@ -450,64 +450,6 @@ function App() {
             </Card>
           </div>
 
-          {/* Care Pathway */}
-          <Card className="shadow-lg" data-testid="care-pathway-card">
-            <CardHeader>
-              <CardTitle className="text-3xl font-serif text-gray-800" style={{ fontFamily: 'Georgia, serif' }}>
-                Your Care Pathway
-              </CardTitle>
-              <CardDescription className="text-lg">
-                Step-by-step guidance for managing your symptoms
-              </CardDescription>
-            </CardHeader>
-            <CardContent className="space-y-6">
-              <div className="flex gap-4">
-                <div className="flex-shrink-0 w-12 h-12 rounded-full bg-green-600 text-white flex items-center justify-center font-semibold text-lg">
-                  1
-                </div>
-                <div className="flex-1">
-                  <h4 className="font-semibold text-xl text-gray-800 mb-2">Consult Recommended Specialist</h4>
-                  <p className="text-gray-700 text-lg">
-                    Schedule an appointment with a neurologist or primary care physician to evaluate your symptoms
-                  </p>
-                </div>
-              </div>
-              <div className="flex gap-4">
-                <div className="flex-shrink-0 w-12 h-12 rounded-full bg-green-600 text-white flex items-center justify-center font-semibold text-lg">
-                  2
-                </div>
-                <div className="flex-1">
-                  <h4 className="font-semibold text-xl text-gray-800 mb-2">Diagnostic Tests</h4>
-                  <p className="text-gray-700 text-lg">
-                    Your doctor may order tests such as imaging (MRI/CT scan) or balance function tests to determine the cause
-                  </p>
-                </div>
-              </div>
-              <div className="flex gap-4">
-                <div className="flex-shrink-0 w-12 h-12 rounded-full bg-green-600 text-white flex items-center justify-center font-semibold text-lg">
-                  3
-                </div>
-                <div className="flex-1">
-                  <h4 className="font-semibold text-xl text-gray-800 mb-2">Treatment Plan</h4>
-                  <p className="text-gray-700 text-lg">
-                    Follow prescribed treatment which may include medication, physical therapy, or lifestyle modifications
-                  </p>
-                </div>
-              </div>
-              <div className="flex gap-4">
-                <div className="flex-shrink-0 w-12 h-12 rounded-full bg-green-600 text-white flex items-center justify-center font-semibold text-lg">
-                  4
-                </div>
-                <div className="flex-1">
-                  <h4 className="font-semibold text-xl text-gray-800 mb-2">Follow-up Care</h4>
-                  <p className="text-gray-700 text-lg">
-                    Schedule follow-up appointments to monitor progress and adjust treatment as needed
-                  </p>
-                </div>
-              </div>
-            </CardContent>
-          </Card>
-
           {/* Important Disclaimer */}
           <Card className="border-2 border-gray-400 bg-gray-50 shadow-lg" data-testid="disclaimer-card">
             <CardContent className="p-6">
@@ -528,8 +470,15 @@ function App() {
             </CardContent>
           </Card>
 
-          {/* View Doctors Button */}
-          <div className="flex justify-center pt-6">
+          {/* Action Buttons */}
+          <div className="flex flex-wrap justify-center gap-4 pt-6">
+            <Button
+              onClick={handleViewCarePathway}
+              className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-6 text-xl"
+              data-testid="view-care-pathway-btn"
+            >
+              View Your Care Pathway
+            </Button>
             <Button
               onClick={handleViewDoctors}
               className="bg-green-600 hover:bg-green-700 text-white px-8 py-6 text-xl"
