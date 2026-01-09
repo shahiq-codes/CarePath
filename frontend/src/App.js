@@ -151,6 +151,16 @@ function App() {
             </p>
           </div>
 
+          {/* Specialization Explanation */}
+          <Card className="bg-green-50 border-2 border-green-200" data-testid="specialization-info">
+            <CardContent className="p-6">
+              <h3 className="text-2xl font-semibold text-gray-800 mb-3">Why These Specialists?</h3>
+              <p className="text-lg text-gray-700 leading-relaxed">
+                For symptoms like headache and dizziness, neurologists and internal medicine specialists are best equipped to diagnose and treat underlying conditions. They can perform comprehensive evaluations and recommend appropriate tests and treatments.
+              </p>
+            </CardContent>
+          </Card>
+
           <div className="space-y-6">
             {doctors.map((doctor) => (
               <Card key={doctor.id} className="overflow-hidden shadow-lg" data-testid={`doctor-card-${doctor.id}`}>
