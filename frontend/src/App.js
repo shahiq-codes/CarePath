@@ -305,6 +305,84 @@ function App() {
             </Card>
           </div>
 
+          {/* Care Pathway */}
+          <Card className="shadow-lg" data-testid="care-pathway-card">
+            <CardHeader>
+              <CardTitle className="text-3xl font-serif text-gray-800" style={{ fontFamily: 'Georgia, serif' }}>
+                Your Care Pathway
+              </CardTitle>
+              <CardDescription className="text-lg">
+                Step-by-step guidance for managing your symptoms
+              </CardDescription>
+            </CardHeader>
+            <CardContent className="space-y-6">
+              <div className="flex gap-4">
+                <div className="flex-shrink-0 w-12 h-12 rounded-full bg-green-600 text-white flex items-center justify-center font-semibold text-lg">
+                  1
+                </div>
+                <div className="flex-1">
+                  <h4 className="font-semibold text-xl text-gray-800 mb-2">Consult Recommended Specialist</h4>
+                  <p className="text-gray-700 text-lg">
+                    Schedule an appointment with a neurologist or primary care physician to evaluate your symptoms
+                  </p>
+                </div>
+              </div>
+              <div className="flex gap-4">
+                <div className="flex-shrink-0 w-12 h-12 rounded-full bg-green-600 text-white flex items-center justify-center font-semibold text-lg">
+                  2
+                </div>
+                <div className="flex-1">
+                  <h4 className="font-semibold text-xl text-gray-800 mb-2">Diagnostic Tests</h4>
+                  <p className="text-gray-700 text-lg">
+                    Your doctor may order tests such as imaging (MRI/CT scan) or balance function tests to determine the cause
+                  </p>
+                </div>
+              </div>
+              <div className="flex gap-4">
+                <div className="flex-shrink-0 w-12 h-12 rounded-full bg-green-600 text-white flex items-center justify-center font-semibold text-lg">
+                  3
+                </div>
+                <div className="flex-1">
+                  <h4 className="font-semibold text-xl text-gray-800 mb-2">Treatment Plan</h4>
+                  <p className="text-gray-700 text-lg">
+                    Follow prescribed treatment which may include medication, physical therapy, or lifestyle modifications
+                  </p>
+                </div>
+              </div>
+              <div className="flex gap-4">
+                <div className="flex-shrink-0 w-12 h-12 rounded-full bg-green-600 text-white flex items-center justify-center font-semibold text-lg">
+                  4
+                </div>
+                <div className="flex-1">
+                  <h4 className="font-semibold text-xl text-gray-800 mb-2">Follow-up Care</h4>
+                  <p className="text-gray-700 text-lg">
+                    Schedule follow-up appointments to monitor progress and adjust treatment as needed
+                  </p>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+
+          {/* Important Disclaimer */}
+          <Card className="border-2 border-gray-400 bg-gray-50 shadow-lg" data-testid="disclaimer-card">
+            <CardContent className="p-6">
+              <div className="flex gap-4">
+                <div className="flex-shrink-0">
+                  <AlertCircle className="h-8 w-8 text-gray-700" />
+                </div>
+                <div className="flex-1">
+                  <h3 className="text-2xl font-semibold text-gray-800 mb-3">Important Medical Disclaimer</h3>
+                  <p className="text-lg text-gray-800 leading-relaxed mb-3">
+                    <strong>This is not a medical diagnosis.</strong> The information provided here is for educational and guidance purposes only.
+                  </p>
+                  <p className="text-lg text-gray-700 leading-relaxed">
+                    Always consult with a qualified healthcare professional for proper diagnosis and treatment. If you are experiencing severe symptoms or a medical emergency, please call emergency services immediately or visit the nearest emergency room.
+                  </p>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+
           {/* View Doctors Button */}
           <div className="flex justify-center pt-6">
             <Button
