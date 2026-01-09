@@ -123,6 +123,137 @@ function App() {
     );
   }
 
+  // Care Pathway Page
+  if (currentPage === 'pathway') {
+    return (
+      <div className="min-h-screen bg-gradient-to-b from-green-50 to-white" data-testid="pathway-page">
+        {/* Header */}
+        <div className="bg-white border-b border-gray-200 px-6 py-4">
+          <div className="max-w-6xl mx-auto flex items-center justify-between">
+            <div className="flex items-center space-x-2">
+              <span className="text-3xl text-green-600">❤️</span>
+              <span className="text-2xl font-serif text-gray-800" style={{ fontFamily: 'Georgia, serif' }}>CarePath</span>
+            </div>
+            <Button
+              onClick={handleBackToResults}
+              variant="ghost"
+              className="text-gray-600 hover:text-gray-800"
+              data-testid="back-to-results-btn"
+            >
+              Back to Results
+            </Button>
+          </div>
+        </div>
+
+        <div className="max-w-4xl mx-auto px-6 py-12 space-y-8">
+          <div className="text-center space-y-4">
+            <h1 className="text-5xl font-serif text-gray-800" style={{ fontFamily: 'Georgia, serif' }}>
+              Your Care Pathway
+            </h1>
+            <p className="text-xl text-gray-600">
+              Step-by-step guidance for managing your symptoms
+            </p>
+          </div>
+
+          {/* Care Pathway Steps */}
+          <Card className="shadow-lg" data-testid="care-pathway-card">
+            <CardContent className="p-8 space-y-8">
+              <div className="flex gap-6">
+                <div className="flex-shrink-0 w-16 h-16 rounded-full bg-green-600 text-white flex items-center justify-center font-semibold text-2xl">
+                  1
+                </div>
+                <div className="flex-1">
+                  <h4 className="font-semibold text-2xl text-gray-800 mb-3">Consult Recommended Specialist</h4>
+                  <p className="text-gray-700 text-lg leading-relaxed">
+                    Schedule an appointment with a neurologist or primary care physician to evaluate your symptoms. They will perform a comprehensive assessment and review your medical history.
+                  </p>
+                </div>
+              </div>
+
+              <div className="border-t border-gray-200"></div>
+
+              <div className="flex gap-6">
+                <div className="flex-shrink-0 w-16 h-16 rounded-full bg-green-600 text-white flex items-center justify-center font-semibold text-2xl">
+                  2
+                </div>
+                <div className="flex-1">
+                  <h4 className="font-semibold text-2xl text-gray-800 mb-3">Diagnostic Tests</h4>
+                  <p className="text-gray-700 text-lg leading-relaxed">
+                    Your doctor may order tests such as imaging (MRI/CT scan) or balance function tests to determine the cause. These tests help identify underlying conditions and rule out serious issues.
+                  </p>
+                </div>
+              </div>
+
+              <div className="border-t border-gray-200"></div>
+
+              <div className="flex gap-6">
+                <div className="flex-shrink-0 w-16 h-16 rounded-full bg-green-600 text-white flex items-center justify-center font-semibold text-2xl">
+                  3
+                </div>
+                <div className="flex-1">
+                  <h4 className="font-semibold text-2xl text-gray-800 mb-3">Treatment Plan</h4>
+                  <p className="text-gray-700 text-lg leading-relaxed">
+                    Follow prescribed treatment which may include medication, physical therapy, or lifestyle modifications. Your doctor will create a personalized plan based on your diagnosis.
+                  </p>
+                </div>
+              </div>
+
+              <div className="border-t border-gray-200"></div>
+
+              <div className="flex gap-6">
+                <div className="flex-shrink-0 w-16 h-16 rounded-full bg-green-600 text-white flex items-center justify-center font-semibold text-2xl">
+                  4
+                </div>
+                <div className="flex-1">
+                  <h4 className="font-semibold text-2xl text-gray-800 mb-3">Follow-up Care</h4>
+                  <p className="text-gray-700 text-lg leading-relaxed">
+                    Schedule follow-up appointments to monitor progress and adjust treatment as needed. Regular check-ins ensure your treatment remains effective and address any new concerns.
+                  </p>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+
+          {/* Important Tips */}
+          <Card className="bg-blue-50 border-2 border-blue-200" data-testid="care-tips">
+            <CardContent className="p-6">
+              <h3 className="text-2xl font-semibold text-gray-800 mb-4">Important Tips</h3>
+              <ul className="space-y-3 text-lg text-gray-700">
+                <li className="flex items-start gap-3">
+                  <span className="text-blue-600 text-xl mt-1">✓</span>
+                  <span>Keep a symptom diary to track patterns and triggers</span>
+                </li>
+                <li className="flex items-start gap-3">
+                  <span className="text-blue-600 text-xl mt-1">✓</span>
+                  <span>Bring a list of current medications to your appointment</span>
+                </li>
+                <li className="flex items-start gap-3">
+                  <span className="text-blue-600 text-xl mt-1">✓</span>
+                  <span>Don't hesitate to ask questions or request clarification from your doctor</span>
+                </li>
+                <li className="flex items-start gap-3">
+                  <span className="text-blue-600 text-xl mt-1">✓</span>
+                  <span>Follow treatment plans consistently for best results</span>
+                </li>
+              </ul>
+            </CardContent>
+          </Card>
+
+          {/* Navigation Buttons */}
+          <div className="flex justify-center gap-4 pt-6">
+            <Button
+              onClick={handleViewDoctors}
+              className="bg-green-600 hover:bg-green-700 text-white px-8 py-6 text-xl"
+              data-testid="view-doctors-from-pathway-btn"
+            >
+              View Recommended Doctors
+            </Button>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
   // Recommended Doctors Page
   if (currentPage === 'doctors') {
     return (
