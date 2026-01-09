@@ -9,7 +9,7 @@ import { AlertCircle, ArrowLeft, Home, Calendar, Clock, MapPin, Star, Award } fr
 function App() {
   const [selectedLanguage, setSelectedLanguage] = useState(null);
   const [symptomInput, setSymptomInput] = useState('');
-  const [currentPage, setCurrentPage] = useState('home'); // home, results, doctors
+  const [currentPage, setCurrentPage] = useState('home'); // home, results, doctors, pathway
   const [selectedSymptom, setSelectedSymptom] = useState(null);
 
   const languages = [
