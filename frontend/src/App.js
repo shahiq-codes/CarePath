@@ -1,24 +1,24 @@
 import { useState } from 'react';
 import '@/App.css';
 import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
+import { Textarea } from '@/components/ui/textarea';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
-import { AlertCircle, ArrowLeft } from 'lucide-react';
+import { AlertCircle, ArrowLeft, Home, Calendar, Clock, MapPin, Star, Award } from 'lucide-react';
 
 function App() {
   const [selectedLanguage, setSelectedLanguage] = useState(null);
   const [symptomInput, setSymptomInput] = useState('');
-  const [showResults, setShowResults] = useState(false);
+  const [currentPage, setCurrentPage] = useState('home'); // home, results, doctors
   const [selectedSymptom, setSelectedSymptom] = useState(null);
 
   const languages = [
-    { code: 'en', name: 'English' },
-    { code: 'es', name: 'Español' },
-    { code: 'fr', name: 'Français' },
-    { code: 'de', name: 'Deutsch' },
-    { code: 'zh', name: '中文' },
-    { code: 'ar', name: 'العربية' },
+    { code: 'en', name: 'English', flag: '🇬🇧', native: 'English' },
+    { code: 'hi', name: 'Hindi', flag: '🇮🇳', native: 'हिंदी' },
+    { code: 'es', name: 'Spanish', flag: '🇪🇸', native: 'Español' },
+    { code: 'ja', name: 'Japanese', flag: '🇯🇵', native: '日本語' },
+    { code: 'zh', name: 'Chinese', flag: '🇨🇳', native: '中文' },
+    { code: 'fr', name: 'French', flag: '🇫🇷', native: 'Français' },
   ];
 
   const commonSymptoms = [
@@ -32,21 +32,54 @@ function App() {
     'Back pain',
   ];
 
+  const doctors = [
+    {
+      id: 1,
+      name: 'Dr. Maria Rodriguez',
+      specialty: 'Neurologist',
+      experience: 18,
+      rating: 4.7,
+      distance: 4.5,
+      availability: 'Available Today',
+      hospital: 'Neuro Wellness Institute',
+      photo: 'https://images.unsplash.com/photo-1559839734-2b71ea197ec2?w=400&h=400&fit=crop'
+    },
+    {
+      id: 2,
+      name: 'Dr. James Chen',
+      specialty: 'Internal Medicine',
+      experience: 22,
+      rating: 4.9,
+      distance: 2.3,
+      availability: 'Available Tomorrow',
+      hospital: 'City Medical Center',
+      photo: 'https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?w=400&h=400&fit=crop'
+    }
+  ];
+
   const handleSymptomClick = (symptom) => {
     setSelectedSymptom(symptom);
     setSymptomInput(symptom);
-    setShowResults(true);
+    setCurrentPage('results');
   };
 
-  const handleSearch = () => {
+  const handleFindCare = () => {
     if (symptomInput.trim()) {
       setSelectedSymptom(symptomInput);
-      setShowResults(true);
+      setCurrentPage('results');
     }
   };
 
-  const handleBack = () => {
-    setShowResults(false);
+  const handleViewDoctors = () => {
+    setCurrentPage('doctors');
+  };
+
+  const handleBackToResults = () => {
+    setCurrentPage('results');
+  };
+
+  const handleBackToHome = () => {
+    setCurrentPage('home');
     setSymptomInput('');
     setSelectedSymptom(null);
   };
@@ -55,23 +88,125 @@ function App() {
   if (!selectedLanguage) {
     return (
       <div className="min-h-screen bg-gradient-to-b from-green-50 to-white flex items-center justify-center px-4">
-        <div className="max-w-3xl w-full text-center space-y-8">
-          <div className="space-y-4">
-            <h1 className="text-5xl md:text-6xl font-light text-gray-800">
-              What language do you prefer?
+        <div className="max-w-5xl w-full text-center space-y-12">
+          <div className="space-y-6">
+            <div className="flex justify-center">
+              <div className="w-24 h-24 rounded-full bg-green-600 flex items-center justify-center text-white text-6xl mb-4">
+                🌍
+              </div>
+            </div>
+            <h1 className="text-6xl font-serif text-gray-800" style={{ fontFamily: 'Georgia, serif' }}>
+              CarePath
             </h1>
-            <p className="text-xl text-gray-600">Select your language to continue</p>
+            <p className="text-2xl text-gray-600">What language do you prefer?</p>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 max-w-2xl mx-auto">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto">
             {languages.map((lang) => (
-              <Button
+              <button
                 key={lang.code}
                 onClick={() => setSelectedLanguage(lang.code)}
-                className="h-20 text-2xl bg-white hover:bg-green-50 text-gray-800 border-2 border-green-200 hover:border-green-400 shadow-md hover:shadow-lg transition-all"
+                className="bg-white hover:bg-green-50 border-2 border-gray-200 hover:border-green-300 rounded-2xl p-8 shadow-md hover:shadow-xl transition-all transform hover:scale-105 flex flex-col items-center justify-center space-y-4"
                 data-testid={`language-${lang.code}-btn`}
               >
-                {lang.name}
-              </Button>
+                <div className="text-7xl">{lang.flag}</div>
+                <div className="text-2xl font-semibold text-gray-800">{lang.native}</div>
+                <div className="text-lg text-gray-500">{lang.name}</div>
+              </button>
+            ))}
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  // Recommended Doctors Page
+  if (currentPage === 'doctors') {
+    return (
+      <div className="min-h-screen bg-gradient-to-b from-green-50 to-white" data-testid="doctors-page">
+        {/* Header */}
+        <div className="bg-white border-b border-gray-200 px-6 py-4">
+          <div className="max-w-6xl mx-auto flex items-center justify-between">
+            <div className="flex items-center space-x-2">
+              <span className="text-3xl text-green-600">❤️</span>
+              <span className="text-2xl font-serif text-gray-800" style={{ fontFamily: 'Georgia, serif' }}>CarePath</span>
+            </div>
+            <Button
+              onClick={handleBackToResults}
+              variant="ghost"
+              className="text-gray-600 hover:text-gray-800"
+              data-testid="back-to-results-btn"
+            >
+              Back to Results
+            </Button>
+          </div>
+        </div>
+
+        <div className="max-w-4xl mx-auto px-6 py-12 space-y-8">
+          <div className="text-center space-y-4">
+            <h1 className="text-5xl font-serif text-gray-800" style={{ fontFamily: 'Georgia, serif' }}>
+              Recommended Doctors
+            </h1>
+            <p className="text-xl text-gray-600">
+              Based on your symptoms, these specialists can help
+            </p>
+          </div>
+
+          <div className="space-y-6">
+            {doctors.map((doctor) => (
+              <Card key={doctor.id} className="overflow-hidden shadow-lg" data-testid={`doctor-card-${doctor.id}`}>
+                <CardContent className="p-6">
+                  <div className="flex gap-6">
+                    {/* Doctor Photo */}
+                    <div className="flex-shrink-0">
+                      <img
+                        src={doctor.photo}
+                        alt={doctor.name}
+                        className="w-32 h-32 rounded-lg object-cover"
+                      />
+                    </div>
+
+                    {/* Doctor Info */}
+                    <div className="flex-1 space-y-4">
+                      <div>
+                        <h2 className="text-3xl font-serif text-gray-800" style={{ fontFamily: 'Georgia, serif' }}>
+                          {doctor.name}
+                        </h2>
+                        <p className="text-xl text-gray-600 mt-1">{doctor.specialty}</p>
+                      </div>
+
+                      <div className="flex flex-wrap gap-4 text-gray-700">
+                        <div className="flex items-center gap-2">
+                          <Award className="w-5 h-5 text-green-600" />
+                          <span>{doctor.experience} years exp.</span>
+                        </div>
+                        <div className="flex items-center gap-2">
+                          <Star className="w-5 h-5 text-yellow-500 fill-yellow-500" />
+                          <span>{doctor.rating} rating</span>
+                        </div>
+                        <div className="flex items-center gap-2">
+                          <MapPin className="w-5 h-5 text-red-500" />
+                          <span>{doctor.distance} km</span>
+                        </div>
+                      </div>
+
+                      <div className="flex items-center gap-2 text-green-700">
+                        <Clock className="w-5 h-5" />
+                        <span className="font-medium">{doctor.availability}</span>
+                      </div>
+
+                      <p className="text-gray-600">{doctor.hospital}</p>
+
+                      <Button
+                        className="bg-orange-600 hover:bg-orange-700 text-white px-6 py-6 text-lg"
+                        data-testid={`book-appointment-${doctor.id}`}
+                      >
+                        <Calendar className="mr-2 h-5 w-5" />
+                        Book Appointment
+                      </Button>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
             ))}
           </div>
         </div>
@@ -80,215 +215,170 @@ function App() {
   }
 
   // Results Page
-  if (showResults) {
+  if (currentPage === 'results') {
     return (
       <div className="min-h-screen bg-gradient-to-b from-green-50 to-white" data-testid="results-page">
-        <div className="max-w-5xl mx-auto px-4 py-8 space-y-8">
-          {/* Back Button */}
-          <Button
-            onClick={handleBack}
-            variant="ghost"
-            className="text-gray-600 hover:text-gray-800"
-            data-testid="back-btn"
-          >
-            <ArrowLeft className="mr-2 h-5 w-5" />
-            Back to Search
-          </Button>
-
-          {/* Symptom Title */}
-          <div className="text-center space-y-2">
-            <h1 className="text-4xl md:text-5xl font-light text-gray-800">
-              {selectedSymptom}
-            </h1>
+        {/* Header */}
+        <div className="bg-white border-b border-gray-200 px-6 py-4">
+          <div className="max-w-6xl mx-auto flex items-center justify-between">
+            <div className="flex items-center space-x-2">
+              <span className="text-3xl text-green-600">❤️</span>
+              <span className="text-2xl font-serif text-gray-800" style={{ fontFamily: 'Georgia, serif' }}>CarePath</span>
+            </div>
+            <Button
+              onClick={handleBackToHome}
+              variant="ghost"
+              className="text-gray-600 hover:text-gray-800 flex items-center gap-2"
+              data-testid="home-btn"
+            >
+              <Home className="w-5 h-5" />
+              Home
+            </Button>
           </div>
+        </div>
 
-          {/* Urgency Level */}
-          <Card className="border-2 border-amber-200 bg-amber-50" data-testid="urgency-card">
-            <CardHeader>
-              <div className="flex items-center gap-2">
-                <AlertCircle className="h-6 w-6 text-amber-600" />
-                <CardTitle className="text-2xl text-amber-800">Urgency Level</CardTitle>
+        <div className="max-w-4xl mx-auto px-6 py-12 space-y-8">
+          {/* Urgency Level Card */}
+          <Card className="border-2 border-orange-300 bg-orange-50 shadow-lg" data-testid="urgency-card">
+            <CardContent className="p-6">
+              <div className="flex items-start gap-4">
+                <div className="flex-shrink-0 w-16 h-16 rounded-full bg-orange-500 flex items-center justify-center">
+                  <AlertCircle className="h-8 w-8 text-white" />
+                </div>
+                <div className="flex-1">
+                  <h2 className="text-3xl font-serif text-gray-800 mb-3" style={{ fontFamily: 'Georgia, serif' }}>
+                    Urgency Level: Consult Soon
+                  </h2>
+                  <p className="text-lg text-gray-700 mb-4">
+                    Based on your symptoms, this is our recommendation for how soon you should seek care.
+                  </p>
+                  <p className="text-lg text-orange-700 font-medium">
+                    Confidence: Medium
+                  </p>
+                </div>
               </div>
-            </CardHeader>
-            <CardContent>
-              <Badge className="text-lg px-4 py-2 bg-amber-600 hover:bg-amber-700" data-testid="urgency-badge">
-                Consult Soon
-              </Badge>
-              <p className="mt-4 text-gray-700 text-lg">
-                We recommend consulting with a healthcare provider within the next few days.
-              </p>
             </CardContent>
           </Card>
 
           {/* Possible Related Conditions */}
-          <Card data-testid="conditions-card">
-            <CardHeader>
-              <CardTitle className="text-2xl text-gray-800">Possible Related Conditions</CardTitle>
-              <CardDescription className="text-lg">
-                These are common conditions associated with your symptoms
-              </CardDescription>
-            </CardHeader>
-            <CardContent>
-              <ul className="space-y-3 text-gray-700 text-lg">
-                <li className="flex items-start">
-                  <span className="mr-3 text-green-600 text-xl">•</span>
-                  <span>Tension headache or migraine (if Headache)</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-3 text-green-600 text-xl">•</span>
-                  <span>Viral or bacterial infection (if Fever)</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-3 text-green-600 text-xl">•</span>
-                  <span>Respiratory condition (if Cough)</span>
-                </li>
-              </ul>
-            </CardContent>
-          </Card>
+          <div className="space-y-6">
+            <h2 className="text-4xl font-serif text-gray-800" style={{ fontFamily: 'Georgia, serif' }}>
+              Possible Related Conditions
+            </h2>
 
-          {/* Recommended Specialists */}
-          <Card data-testid="specialists-card">
-            <CardHeader>
-              <CardTitle className="text-2xl text-gray-800">Recommended Specialists</CardTitle>
-              <CardDescription className="text-lg">
-                These healthcare providers can help with your symptoms
-              </CardDescription>
-            </CardHeader>
-            <CardContent>
-              <div className="space-y-4">
-                <div className="p-4 bg-green-50 rounded-lg border border-green-200">
-                  <h3 className="font-semibold text-xl text-gray-800">Primary Care Physician (PCP)</h3>
-                  <p className="text-gray-600 text-lg mt-2">
-                    Your first point of contact for most health concerns
-                  </p>
+            {/* Condition Card 1 */}
+            <Card className="shadow-lg" data-testid="condition-card-1">
+              <CardContent className="p-6">
+                <div className="flex items-start justify-between gap-4">
+                  <div className="flex-1">
+                    <h3 className="text-2xl font-serif text-gray-800 mb-3" style={{ fontFamily: 'Georgia, serif' }}>
+                      Migraine or tension-type headache
+                    </h3>
+                    <p className="text-lg text-gray-700 leading-relaxed">
+                      Common causes of persistent headache, often associated with sensitivity to light/sound, stress, or muscle tension; dizziness can sometimes accompany these.
+                    </p>
+                  </div>
+                  <Badge className="bg-red-600 hover:bg-red-700 text-white px-4 py-2 text-base" data-testid="severity-badge-high">
+                    high
+                  </Badge>
                 </div>
-                <div className="p-4 bg-green-50 rounded-lg border border-green-200">
-                  <h3 className="font-semibold text-xl text-gray-800">Neurologist</h3>
-                  <p className="text-gray-600 text-lg mt-2">
-                    For persistent or severe headaches and neurological symptoms
-                  </p>
-                </div>
-              </div>
-            </CardContent>
-          </Card>
+              </CardContent>
+            </Card>
 
-          {/* Care Pathway */}
-          <Card data-testid="care-pathway-card">
-            <CardHeader>
-              <CardTitle className="text-2xl text-gray-800">Your Care Pathway</CardTitle>
-              <CardDescription className="text-lg">
-                Step-by-step guidance for managing your symptoms
-              </CardDescription>
-            </CardHeader>
-            <CardContent>
-              <div className="space-y-6">
-                <div className="flex gap-4">
-                  <div className="flex-shrink-0 w-10 h-10 rounded-full bg-green-600 text-white flex items-center justify-center font-semibold text-lg">
-                    1
-                  </div>
+            {/* Condition Card 2 */}
+            <Card className="shadow-lg" data-testid="condition-card-2">
+              <CardContent className="p-6">
+                <div className="flex items-start justify-between gap-4">
                   <div className="flex-1">
-                    <h4 className="font-semibold text-xl text-gray-800">Schedule Appointment</h4>
-                    <p className="text-gray-600 text-lg mt-1">
-                      Contact your primary care physician or recommended specialist
+                    <h3 className="text-2xl font-serif text-gray-800 mb-3" style={{ fontFamily: 'Georgia, serif' }}>
+                      Vestibular disorder (e.g., vestibular migraine or inner ear issue)
+                    </h3>
+                    <p className="text-lg text-gray-700 leading-relaxed">
+                      Inner ear or balance system problems can cause dizziness or a spinning sensation (vertigo), often with headache, nausea, or imbalance.
                     </p>
                   </div>
+                  <Badge className="bg-orange-600 hover:bg-orange-700 text-white px-4 py-2 text-base" data-testid="severity-badge-medium">
+                    medium
+                  </Badge>
                 </div>
-                <div className="flex gap-4">
-                  <div className="flex-shrink-0 w-10 h-10 rounded-full bg-green-600 text-white flex items-center justify-center font-semibold text-lg">
-                    2
-                  </div>
-                  <div className="flex-1">
-                    <h4 className="font-semibold text-xl text-gray-800">Initial Consultation</h4>
-                    <p className="text-gray-600 text-lg mt-1">
-                      Doctor will assess your symptoms and may order tests
-                    </p>
-                  </div>
-                </div>
-                <div className="flex gap-4">
-                  <div className="flex-shrink-0 w-10 h-10 rounded-full bg-green-600 text-white flex items-center justify-center font-semibold text-lg">
-                    3
-                  </div>
-                  <div className="flex-1">
-                    <h4 className="font-semibold text-xl text-gray-800">Follow Recommended Treatment</h4>
-                    <p className="text-gray-600 text-lg mt-1">
-                      Follow your healthcare provider's advice and prescribed treatment plan
-                    </p>
-                  </div>
-                </div>
-                <div className="flex gap-4">
-                  <div className="flex-shrink-0 w-10 h-10 rounded-full bg-green-600 text-white flex items-center justify-center font-semibold text-lg">
-                    4
-                  </div>
-                  <div className="flex-1">
-                    <h4 className="font-semibold text-xl text-gray-800">Follow-up Care</h4>
-                    <p className="text-gray-600 text-lg mt-1">
-                      Schedule follow-up appointments as recommended
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </CardContent>
-          </Card>
+              </CardContent>
+            </Card>
+          </div>
 
-          {/* Disclaimer */}
-          <Card className="border-2 border-gray-300 bg-gray-50" data-testid="disclaimer-card">
-            <CardContent className="pt-6">
-              <div className="flex gap-4">
-                <AlertCircle className="h-6 w-6 text-gray-600 flex-shrink-0 mt-1" />
-                <div>
-                  <h4 className="font-semibold text-xl text-gray-800 mb-2">Important Disclaimer</h4>
-                  <p className="text-gray-700 text-lg leading-relaxed">
-                    This is not a medical diagnosis. The information provided is for guidance only and should not replace professional medical advice. Always consult with a qualified healthcare provider for proper diagnosis and treatment.
-                  </p>
-                </div>
-              </div>
-            </CardContent>
-          </Card>
+          {/* View Doctors Button */}
+          <div className="flex justify-center pt-6">
+            <Button
+              onClick={handleViewDoctors}
+              className="bg-green-600 hover:bg-green-700 text-white px-8 py-6 text-xl"
+              data-testid="view-doctors-btn"
+            >
+              View Recommended Doctors
+            </Button>
+          </div>
         </div>
       </div>
     );
   }
 
-  // Home Page (v1.0 with hover-only labels)
+  // Home Page - v1.0 with hover-only Common Symptoms labels
   return (
     <div className="min-h-screen bg-gradient-to-b from-green-50 to-white" data-testid="home-page">
-      <div className="max-w-4xl mx-auto px-4 py-16 space-y-12">
-        {/* Header */}
-        <div className="text-center space-y-4">
-          <h1 className="text-5xl md:text-6xl font-light text-gray-800">
+      {/* Header */}
+      <div className="bg-white border-b border-gray-200 px-6 py-4">
+        <div className="max-w-6xl mx-auto flex items-center justify-between">
+          <div className="flex items-center space-x-2">
+            <span className="text-3xl text-green-600">❤️</span>
+            <span className="text-2xl font-serif text-gray-800" style={{ fontFamily: 'Georgia, serif' }}>CarePath</span>
+          </div>
+          <div className="flex items-center gap-6">
+            <div className="flex items-center gap-2 px-4 py-2 bg-green-50 rounded-lg border border-green-200">
+              <span className="text-green-700">🌍</span>
+              <span className="text-sm text-green-700">Language set to English</span>
+            </div>
+            <button className="text-gray-600 hover:text-gray-800 flex items-center gap-2" data-testid="about-link">
+              <AlertCircle className="w-5 h-5" />
+              About
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div className="max-w-4xl mx-auto px-6 py-16 space-y-12">
+        {/* Hero Section */}
+        <div className="text-center space-y-6">
+          <h1 className="text-6xl font-serif text-gray-800 leading-tight" style={{ fontFamily: 'Georgia, serif' }}>
             Tell us what you're experiencing
           </h1>
           <p className="text-xl text-gray-600">
-            Enter your symptoms to find the right healthcare guidance
+            We'll help you find the right doctor and care pathway for your health needs
           </p>
         </div>
 
-        {/* Main Search Input */}
-        <div className="space-y-4">
-          <div className="flex gap-3">
-            <Input
-              type="text"
-              placeholder="Describe your symptoms..."
+        {/* Symptom Input Card */}
+        <Card className="shadow-xl">
+          <CardContent className="p-8 space-y-6">
+            <Textarea
+              placeholder="Describe your symptoms... (e.g., 'I have a persistent headache and feel dizzy')" 
               value={symptomInput}
               onChange={(e) => setSymptomInput(e.target.value)}
-              onKeyPress={(e) => e.key === 'Enter' && handleSearch()}
-              className="h-16 text-xl border-2 border-green-200 focus:border-green-400 rounded-lg"
+              className="min-h-[120px] text-lg border-2 border-gray-200 focus:border-green-400 resize-none"
               data-testid="symptom-input"
             />
             <Button
-              onClick={handleSearch}
-              className="h-16 px-8 text-xl bg-green-600 hover:bg-green-700"
+              onClick={handleFindCare}
+              className="w-full h-16 text-xl bg-green-600 hover:bg-green-700"
               disabled={!symptomInput.trim()}
-              data-testid="search-btn"
+              data-testid="find-care-btn"
             >
-              Search
+              <Calendar className="mr-2 h-6 w-6" />
+              Find My Care
             </Button>
-          </div>
-        </div>
+          </CardContent>
+        </Card>
 
-        {/* Common Symptoms Section - v1.1 with permanently visible labels */}
+        {/* Common Symptoms Section - v1.0 with hover-only labels */}
         <div className="space-y-6">
-          <h2 className="text-2xl font-light text-gray-700 text-center">
+          <h2 className="text-3xl font-light text-gray-700 text-center">
             Common Symptoms
           </h2>
           <div className="flex flex-wrap justify-center gap-3" data-testid="common-symptoms">
@@ -296,28 +386,24 @@ function App() {
               <button
                 key={symptom}
                 onClick={() => handleSymptomClick(symptom)}
-                className="symptom-pill-v1 px-6 py-3 rounded-full border-2 border-green-300 bg-white hover:bg-green-50 hover:border-green-500 transition-all shadow-sm hover:shadow-md text-lg text-gray-800"
+                className="symptom-pill-v1 px-8 py-4 rounded-full border-2 border-green-300 bg-white hover:bg-green-50 hover:border-green-500 transition-all shadow-sm hover:shadow-md text-lg group relative min-w-[160px]"
                 data-testid={`symptom-${symptom.toLowerCase().replace(' ', '-')}`}
               >
-                {/* v1.1: Label is always visible */}
-                {symptom}
+                {/* v1.0: Label only shows on hover */}
+                <span className="opacity-0 group-hover:opacity-100 transition-opacity text-gray-800">
+                  {symptom}
+                </span>
+                {/* Invisible placeholder to maintain button size */}
+                <span className="invisible absolute inset-0 flex items-center justify-center">
+                  {symptom}
+                </span>
               </button>
             ))}
           </div>
+          <p className="text-center text-gray-500 text-base">
+            Hover over buttons to see common symptoms
+          </p>
         </div>
-
-        {/* About Section */}
-        <Card className="border-2 border-green-200 bg-white" data-testid="about-card">
-          <CardHeader>
-            <CardTitle className="text-2xl text-gray-800 text-center">Patient-First Healthcare Navigation</CardTitle>
-          </CardHeader>
-          <CardContent>
-            <p className="text-gray-700 text-lg text-center leading-relaxed">
-              We help you find the right healthcare provider by understanding your symptoms and concerns. 
-              Our guidance is designed to be clear, accessible, and trustworthy for all ages.
-            </p>
-          </CardContent>
-        </Card>
       </div>
     </div>
   );
