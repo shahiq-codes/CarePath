@@ -376,7 +376,7 @@ function App() {
           </CardContent>
         </Card>
 
-        {/* Common Symptoms Section - v1.0 with hover-only labels */}
+        {/* Common Symptoms Section - v1.1 with permanently visible labels */}
         <div className="space-y-6">
           <h2 className="text-3xl font-light text-gray-700 text-center">
             Common Symptoms
@@ -386,23 +386,14 @@ function App() {
               <button
                 key={symptom}
                 onClick={() => handleSymptomClick(symptom)}
-                className="symptom-pill-v1 px-8 py-4 rounded-full border-2 border-green-300 bg-white hover:bg-green-50 hover:border-green-500 transition-all shadow-sm hover:shadow-md text-lg group relative min-w-[160px]"
+                className="symptom-pill-v1 px-8 py-4 rounded-full border-2 border-green-300 bg-white hover:bg-green-50 hover:border-green-500 transition-all shadow-sm hover:shadow-md text-lg text-gray-800 min-w-[160px]"
                 data-testid={`symptom-${symptom.toLowerCase().replace(' ', '-')}`}
               >
-                {/* v1.0: Label only shows on hover */}
-                <span className="opacity-0 group-hover:opacity-100 transition-opacity text-gray-800">
-                  {symptom}
-                </span>
-                {/* Invisible placeholder to maintain button size */}
-                <span className="invisible absolute inset-0 flex items-center justify-center">
-                  {symptom}
-                </span>
+                {/* v1.1: Label is always visible */}
+                {symptom}
               </button>
             ))}
           </div>
-          <p className="text-center text-gray-500 text-base">
-            Hover over buttons to see common symptoms
-          </p>
         </div>
       </div>
     </div>
