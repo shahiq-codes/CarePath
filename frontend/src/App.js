@@ -239,14 +239,38 @@ function App() {
             </CardContent>
           </Card>
 
+          {/* Recommended Specialists Section */}
+          <div className="space-y-6 pt-8">
+            <h2 className="text-4xl font-serif text-gray-800" style={{ fontFamily: 'Georgia, serif' }}>
+              Recommended Specialists
+            </h2>
+            <div className="flex flex-wrap gap-4">
+              <button className="px-6 py-3 bg-green-700 hover:bg-green-800 text-white rounded-full text-lg font-medium transition-all shadow-md" data-testid="specialist-pcp-pathway">
+                Primary Care Physician / General Practitioner
+              </button>
+              <button className="px-6 py-3 bg-green-700 hover:bg-green-800 text-white rounded-full text-lg font-medium transition-all shadow-md" data-testid="specialist-internal-pathway">
+                Internal Medicine Specialist
+              </button>
+              <button className="px-6 py-3 bg-green-700 hover:bg-green-800 text-white rounded-full text-lg font-medium transition-all shadow-md" data-testid="specialist-endo-pathway">
+                Endocrinologist (if thyroid or hormonal issue is suspected)
+              </button>
+              <button className="px-6 py-3 bg-green-700 hover:bg-green-800 text-white rounded-full text-lg font-medium transition-all shadow-md" data-testid="specialist-sleep-pathway">
+                Sleep Medicine Specialist (if sleep quality problems are found)
+              </button>
+            </div>
+          </div>
+
           {/* Navigation Buttons */}
-          <div className="flex justify-center gap-4 pt-6">
+          <div className="flex justify-center gap-4 pt-8">
             <Button
               onClick={handleViewDoctors}
-              className="bg-green-600 hover:bg-green-700 text-white px-8 py-6 text-xl"
+              className="bg-green-700 hover:bg-green-800 text-white px-8 py-6 text-xl flex items-center gap-3"
               data-testid="view-doctors-from-pathway-btn"
             >
-              View Recommended Doctors
+              <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 20 20">
+                <path d="M9 6a3 3 0 11-6 0 3 3 0 016 0zM17 6a3 3 0 11-6 0 3 3 0 016 0zM12.93 17c.046-.327.07-.66.07-1a6.97 6.97 0 00-1.5-4.33A5 5 0 0119 16v1h-6.07zM6 11a5 5 0 015 5v1H1v-1a5 5 0 015-5z" />
+              </svg>
+              Find Doctors
             </Button>
           </div>
         </div>
