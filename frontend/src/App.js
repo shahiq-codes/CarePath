@@ -450,41 +450,65 @@ function App() {
             </Card>
           </div>
 
+          {/* Recommended Specialists Section */}
+          <div className="space-y-6">
+            <h2 className="text-4xl font-serif text-gray-800" style={{ fontFamily: 'Georgia, serif' }}>
+              Recommended Specialists
+            </h2>
+            <div className="flex flex-wrap gap-4">
+              <button className="px-6 py-3 bg-green-700 hover:bg-green-800 text-white rounded-full text-lg font-medium transition-all shadow-md" data-testid="specialist-pcp">
+                Primary Care Physician / General Practitioner
+              </button>
+              <button className="px-6 py-3 bg-green-700 hover:bg-green-800 text-white rounded-full text-lg font-medium transition-all shadow-md" data-testid="specialist-internal">
+                Internal Medicine Specialist
+              </button>
+              <button className="px-6 py-3 bg-green-700 hover:bg-green-800 text-white rounded-full text-lg font-medium transition-all shadow-md" data-testid="specialist-endo">
+                Endocrinologist (if thyroid or hormonal issue is suspected)
+              </button>
+              <button className="px-6 py-3 bg-green-700 hover:bg-green-800 text-white rounded-full text-lg font-medium transition-all shadow-md" data-testid="specialist-sleep">
+                Sleep Medicine Specialist (if sleep quality problems are found)
+              </button>
+            </div>
+          </div>
+
           {/* Important Disclaimer */}
-          <Card className="border-2 border-gray-400 bg-gray-50 shadow-lg" data-testid="disclaimer-card">
+          <Card className="border-2 border-orange-300 bg-orange-50 shadow-lg" data-testid="disclaimer-card">
             <CardContent className="p-6">
               <div className="flex gap-4">
                 <div className="flex-shrink-0">
-                  <AlertCircle className="h-8 w-8 text-gray-700" />
+                  <AlertCircle className="h-8 w-8 text-orange-700" />
                 </div>
                 <div className="flex-1">
-                  <h3 className="text-2xl font-semibold text-gray-800 mb-3">Important Medical Disclaimer</h3>
-                  <p className="text-lg text-gray-800 leading-relaxed mb-3">
-                    <strong>This is not a medical diagnosis.</strong> The information provided here is for educational and guidance purposes only.
-                  </p>
-                  <p className="text-lg text-gray-700 leading-relaxed">
-                    Always consult with a qualified healthcare professional for proper diagnosis and treatment. If you are experiencing severe symptoms or a medical emergency, please call emergency services immediately or visit the nearest emergency room.
+                  <h3 className="text-xl font-bold text-gray-800 mb-2">Important:</h3>
+                  <p className="text-lg text-gray-800 leading-relaxed">
+                    This is not a medical diagnosis. Please consult with a healthcare professional for proper evaluation and treatment.
                   </p>
                 </div>
               </div>
             </CardContent>
           </Card>
 
-          {/* Action Buttons */}
-          <div className="flex flex-wrap justify-center gap-4 pt-6">
-            <Button
-              onClick={handleViewCarePathway}
-              className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-6 text-xl"
-              data-testid="view-care-pathway-btn"
-            >
-              View Your Care Pathway
-            </Button>
+          {/* Action Buttons - Side by Side */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 pt-6">
             <Button
               onClick={handleViewDoctors}
-              className="bg-green-600 hover:bg-green-700 text-white px-8 py-6 text-xl"
-              data-testid="view-doctors-btn"
+              className="bg-green-700 hover:bg-green-800 text-white px-8 py-8 text-xl flex items-center justify-center gap-3"
+              data-testid="find-doctors-btn"
             >
-              View Recommended Doctors
+              <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 20 20">
+                <path d="M9 6a3 3 0 11-6 0 3 3 0 016 0zM17 6a3 3 0 11-6 0 3 3 0 016 0zM12.93 17c.046-.327.07-.66.07-1a6.97 6.97 0 00-1.5-4.33A5 5 0 0119 16v1h-6.07zM6 11a5 5 0 015 5v1H1v-1a5 5 0 015-5z" />
+              </svg>
+              Find Doctors
+            </Button>
+            <Button
+              onClick={handleViewCarePathway}
+              className="bg-orange-600 hover:bg-orange-700 text-white px-8 py-8 text-xl flex items-center justify-center gap-3"
+              data-testid="view-care-pathway-btn"
+            >
+              <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 20 20">
+                <path fillRule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clipRule="evenodd" />
+              </svg>
+              View Care Pathway
             </Button>
           </div>
         </div>
